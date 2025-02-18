@@ -11,8 +11,11 @@ public enum CustomErrorEnum {
 
     EMAIL_SEND_EXCEPTION(500, "MESSAGING-001", "Email send exception."),
 
+    // Storage - service
     UPLOADING_FILE_EXCEPTION(500, "STORAGE-001", "Error uploading file to R2."),
     OBTAINING_DOWNLOAD_LINK_EXCEPTION(500, "STORAGE-002", "Error generating pre signed URL."),
+    PAYLOAD_TOO_LARGE(413, "STORAGE-003", "Payload Too Large."),
+    UNSUPPORTED_MEDIA_TYPE(413, "STORAGE-004", "Unsupported Media Type."),
 
     ;
     public final Integer httpStatus;
