@@ -10,6 +10,10 @@ public enum CustomErrorEnum {
 
 
     EMAIL_SEND_EXCEPTION(500, "MESSAGING-001", "Email send exception."),
+
+    UPLOADING_FILE_EXCEPTION(500, "STORAGE-001", "Error uploading file to R2."),
+    OBTAINING_DOWNLOAD_LINK_EXCEPTION(500, "STORAGE-002", "Error generating pre signed URL."),
+
     ;
     public final Integer httpStatus;
 
