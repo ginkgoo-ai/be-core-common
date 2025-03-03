@@ -15,7 +15,8 @@ public class ActivityLogMessage implements Serializable {
     private String applicationId;
     private String activityType;
     private String description;
-    private Map<String, Object> context;
+    private Map<String, Object> variables;
+    private Map<String, Object> attachments;
     private String createdBy;
     private LocalDateTime createdAt;
 }
