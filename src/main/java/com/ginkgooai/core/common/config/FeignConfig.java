@@ -2,6 +2,8 @@ package com.ginkgooai.core.common.config;
 
 import brave.Tracer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ginkgooai.core.common.interceptor.ContextsInterceptor;
+import com.ginkgooai.core.common.utils.ContextUtils;
 import feign.RequestInterceptor;
 import feign.codec.ErrorDecoder;
 import jakarta.annotation.Resource;
@@ -11,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
  * @author: david
@@ -35,6 +38,9 @@ public class FeignConfig {
 
             // 2. Add Bearer token
             addAuthorizationHeader(template);
+
+            // 3. Add Context
+            addContextPropagation(template);
         };
     }
 
@@ -72,6 +78,23 @@ public class FeignConfig {
                 template.header(HttpHeaders.AUTHORIZATION, authorization);
             }
         }
+    }
+
+
+    /**
+     * Propagate context information from the current context to the Feign request.
+     * This method iterates over all key-value pairs in the context and adds them as headers to the request.
+     *
+     * @param template The Feign request template to which the context headers will be added.
+     */
+    private void addContextPropagation(feign.RequestTemplate template) {
+        if (ContextUtils.get() == null) {
+            return;
+        }
+
+        ContextUtils.get().forEach((key, value) -> {
+            template.header(key, value.toString());
+        });
     }
 
     @Bean
