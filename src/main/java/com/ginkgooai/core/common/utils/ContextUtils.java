@@ -21,8 +21,9 @@ public class ContextUtils extends ConcurrentHashMap<String, Object> implements C
                         return contextUtilsClass.getDeclaredConstructor().newInstance();
                     } catch (Exception e) {
                         log.error(e.getMessage(), e);
+                        throw new IllegalStateException("Cannot create ContextUtils instance", e);
+
                     }
-                    return null;
                 }
 
                 @Override
@@ -36,7 +37,9 @@ public class ContextUtils extends ConcurrentHashMap<String, Object> implements C
                 }
             };
 
-    public static ContextUtils get() {return CONTEXT.get();}
+    public static ContextUtils get() {
+        return CONTEXT.get();
+    }
 
     public void clearAll(){
         this.clear();
@@ -44,7 +47,12 @@ public class ContextUtils extends ConcurrentHashMap<String, Object> implements C
     }
 
     public static <T> T get(String key, Class<T> clazz, T defaultValue) {
-        return Optional.of(clazz.cast(CONTEXT.get().get(key))).orElse(defaultValue);
+        return Optional.ofNullable(CONTEXT.get())
+                .map(ctx -> Optional.ofNullable(ctx.get(key))
+                        .filter(clazz::isInstance)
+                        .map(clazz::cast)
+                        .orElse(defaultValue))
+                .orElse(defaultValue);
     }
 
     public <T> T get(String key, Class<T> clazz) {

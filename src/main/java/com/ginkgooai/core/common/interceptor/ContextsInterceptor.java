@@ -12,8 +12,7 @@ public class ContextsInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        ContextInitializer.loadFromHeaders(request);
-
+        ContextInitializer.load(request);
         return true;
     }
 
