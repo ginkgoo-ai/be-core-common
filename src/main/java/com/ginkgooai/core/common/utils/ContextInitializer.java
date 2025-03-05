@@ -43,7 +43,9 @@ public class ContextInitializer implements ContextsConstant {
             return;
         }
 
-        Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(!(SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof Jwt jwt)) {
+            return;
+        }
 
         ContextUtils.set(ContextsConstant.USER_ID, jwt.getClaimAsString("sub"));
         ContextUtils.set(ContextsConstant.USER_EMAIL, jwt.getClaimAsString("email"));
