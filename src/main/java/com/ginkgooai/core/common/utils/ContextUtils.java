@@ -55,7 +55,7 @@ public class ContextUtils extends ConcurrentHashMap<String, Object> implements C
                 .orElse(defaultValue);
     }
 
-    public <T> T get(String key, Class<T> clazz) {
+    public static <T> T get(String key, Class<T> clazz) {
         return get(key, clazz, null);
     }
 
@@ -66,7 +66,12 @@ public class ContextUtils extends ConcurrentHashMap<String, Object> implements C
         CONTEXT.get().put(key, value);
     }
 
-    public String getWorkspaceId(){
+    public static String getWorkspaceId(){
         return get(WORKSPACE_ID, String.class);
     }
+
+    public static String getUserId(){
+        return get(USER_ID, String.class);
+    }
+
 }
