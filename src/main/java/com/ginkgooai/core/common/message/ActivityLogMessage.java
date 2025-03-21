@@ -1,5 +1,6 @@
 package com.ginkgooai.core.common.message;
 
+import com.ginkgooai.core.common.queue.QueueMessage;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,7 +10,7 @@ import java.util.Map;
 
 @Data
 @Builder
-public class ActivityLogMessage implements Serializable {
+public class ActivityLogMessage extends QueueMessage implements Serializable {
     private String workspaceId;
     private String projectId;
     private String applicationId;
