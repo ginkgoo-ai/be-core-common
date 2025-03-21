@@ -37,6 +37,12 @@ public enum ActivityType {
             true,
             null
     ),
+    TALENT_ADDED(
+            "Talent {talentName} imported by {user}",
+            Arrays.asList("talentName", "user"),
+            true,
+            null
+    ),
     TALENT_IMPORTED(
             "{count} talents imported from {source} • [Preview List]",
             Arrays.asList("count", "source", "time"),
