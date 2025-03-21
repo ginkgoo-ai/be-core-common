@@ -49,9 +49,15 @@ public enum ActivityType {
             true,
             "spreadsheet"
     ),
+    SUBMISSION_ADDED(
+            "{user} added {talentName}'s submission {videoName}",
+            Arrays.asList("user", "talentName", "videoName"),
+            true,
+            "video"
+    ),
     SUBMISSION_ADDED_TO_SHORTLIST(
-            "{user} added {talentName}'s submission ({duration}) to shortlist • [Review Notes]",
-            Arrays.asList("user", "talentName", "duration"),
+            "{user} added {talentName}'s submission ({videoName}) to shortlist",
+            Arrays.asList("user", "talentName", "videoName"),
             true,
             "video"
     ),
