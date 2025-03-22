@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.util.ObjectUtils;
 
 import java.util.Collection;
 import java.util.Enumeration;
@@ -28,7 +29,7 @@ public class ContextInitializer implements ContextsConstant {
         Enumeration<String> headers = request.getHeaderNames();
         while (headers.hasMoreElements()) {
             String header = headers.nextElement();
-            if (header.startsWith(HEADER_WORKSPACE_ID)) {// 去掉前缀
+            if (header.startsWith(HEADER_WORKSPACE_ID)) {
                 ContextUtils.set(ContextsConstant.WORKSPACE_ID, request.getHeader(header));
             }
 
@@ -51,6 +52,10 @@ public class ContextInitializer implements ContextsConstant {
         ContextUtils.set(ContextsConstant.USER_EMAIL, jwt.getClaimAsString("email"));
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         ContextUtils.set(ContextsConstant.USER_ROLE, authorities);
+        
+        if (!ObjectUtils.isEmpty(jwt.getClaimAsString("workspace_id"))) {
+            ContextUtils.set(ContextsConstant.WORKSPACE_ID, jwt.getClaimAsString("workspace_id"));
+        }
     }
 
 
