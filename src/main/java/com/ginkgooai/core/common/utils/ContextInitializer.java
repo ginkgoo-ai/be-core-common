@@ -50,8 +50,8 @@ public class ContextInitializer implements ContextsConstant {
 
         ContextUtils.set(ContextsConstant.USER_ID, jwt.getClaimAsString("sub"));
         ContextUtils.set(ContextsConstant.USER_EMAIL, jwt.getClaimAsString("email"));
-        Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-        ContextUtils.set(ContextsConstant.USER_ROLE, authorities);
+//        Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        ContextUtils.set(ContextsConstant.USER_ROLE, jwt.getClaimAsStringList("role"));
         
         if (!ObjectUtils.isEmpty(jwt.getClaimAsString("workspace_id"))) {
             ContextUtils.set(ContextsConstant.WORKSPACE_ID, jwt.getClaimAsString("workspace_id"));
