@@ -3,11 +3,13 @@ package com.ginkgooai.core.common.message;
 import com.ginkgooai.core.common.queue.QueueMessage;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 public class ActivityLogMessage extends QueueMessage implements Serializable {
