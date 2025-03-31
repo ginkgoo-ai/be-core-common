@@ -1,4 +1,4 @@
-package com.ginkgooai.core.common.bean;
+package com.ginkgooai.core.common.enums;
 
 import lombok.Getter;
 
