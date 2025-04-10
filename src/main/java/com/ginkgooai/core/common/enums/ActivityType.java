@@ -7,12 +7,12 @@ import java.util.List;
 
 @Getter
 public enum ActivityType {
-	COMPANY_INFO_UPDATED(
-		"{user} updated company profile",
-		Arrays.asList("user"),
-		false,
-		"image"
-	),
+	//	COMPANY_INFO_UPDATED(
+//		"{user} updated company profile",
+//		Arrays.asList("user"),
+//		false,
+//		"image"
+//	),
 	PROJECT_CREATED(
 		"{user} created project '{project}'",
 		Arrays.asList("user", "project"),
