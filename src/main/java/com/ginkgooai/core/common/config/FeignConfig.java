@@ -2,18 +2,17 @@ package com.ginkgooai.core.common.config;
 
 import brave.Tracer;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ginkgooai.core.common.interceptor.ContextsInterceptor;
 import com.ginkgooai.core.common.utils.ContextUtils;
 import feign.RequestInterceptor;
 import feign.codec.ErrorDecoder;
 import jakarta.annotation.Resource;
+import okhttp3.OkHttpClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
  * @author: david
@@ -103,4 +102,8 @@ public class FeignConfig {
         return new FeignProblemDetailErrorDecoder(objectMapper);
     }
 
+	@Bean
+	public OkHttpClient client() {
+		return new OkHttpClient();
+	}
 }
