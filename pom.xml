@@ -143,7 +143,6 @@
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-okhttp</artifactId>
             <version>13.5</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 
