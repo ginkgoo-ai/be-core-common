@@ -35,7 +35,8 @@ public enum ActivityType {
 		true,
 			"spreadsheet"),
 	SUBMISSION_ADDED(
-			"added a submission", "New submission added in {talentName}'s application for \"{roleName}\" of {project}.",
+			"added a submission",
+			"New submission added in {talentName}'s application for \"{roleName}\" of \"{project}\".",
 			Arrays.asList("talentName", "roleName", "project"),
 		true,
 		"video"
@@ -48,7 +49,7 @@ public enum ActivityType {
 		"video"
 	),
 	TALENT_DIRECT_UPLOAD(
-			"uploaded a submission", "{talentName} uploaded a submission for {roleName} of {project}.",
+			"uploaded a submission", "\"{talentName}\" uploaded a submission for \"{roleName}\" of \"{project}\".",
 			Arrays.asList("talentName", "roleName", "project"),
 		true,
 		"video"
