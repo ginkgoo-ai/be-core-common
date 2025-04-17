@@ -9,7 +9,7 @@ import java.util.List;
 public enum ActivityType {
 
 	PROJECT_CREATED(
-			"created a new project", "{user} created project '{project}'.",
+			"created a new project", "{user} created project \"{project}\".",
 		Arrays.asList("user", "project"),
 		true,
 		null
