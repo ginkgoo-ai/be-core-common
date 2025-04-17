@@ -15,14 +15,13 @@ public enum ActivityType {
 		null
 	),
 	PROJECT_STATUS_CHANGE(
-			"changed project status", "'{project}' status changed from {previousStatus} to {newStatus}.",
+			"changed project status", "\"{project}\" status changed from {previousStatus} to {newStatus}.",
 		Arrays.asList("project", "previousStatus", "newStatus"),
 		true,
 		null
 	),
 	ROLE_CREATED(
-			"role created", "{user} created '{roleName}' in '{project}'.",
-		Arrays.asList("user", "roleName", "project"),
+			"role created", "New role \"{roleName}\" created of \"{project}\".", Arrays.asList("roleName", "project"),
 		true,
 		null
 	),
