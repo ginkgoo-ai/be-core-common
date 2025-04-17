@@ -26,7 +26,7 @@ public enum ActivityType {
 		null
 	),
 	ROLE_STATUS_UPDATE(
-			"updated role status", "'{roleName}' status updated to {newStatus}.",
+			"updated role status", "\"{roleName}\" status updated to {newStatus}.",
 		Arrays.asList("roleName", "newStatus"),
 		true,
 		null
