@@ -10,6 +10,9 @@ import okhttp3.OkHttpClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -75,6 +78,12 @@ public class FeignConfig {
 
             if (StringUtils.hasText(authorization)) {
                 template.header(HttpHeaders.AUTHORIZATION, authorization);
+			}
+			else {
+				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+				if (authentication.getPrincipal() instanceof DefaultOidcUser oidcUser) {
+					template.header(HttpHeaders.AUTHORIZATION, "Bearer " + oidcUser.getIdToken().getTokenValue());
+				}
             }
         }
     }
