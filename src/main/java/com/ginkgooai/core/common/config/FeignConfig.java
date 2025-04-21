@@ -1,6 +1,6 @@
 package com.ginkgooai.core.common.config;
 
-import brave.Tracer;
+import com.alibaba.ttl.threadpool.agent.internal.javassist.bytecode.stackmap.Tracer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ginkgooai.core.common.utils.ContextUtils;
 import feign.RequestInterceptor;
@@ -36,7 +36,8 @@ public class FeignConfig {
     public RequestInterceptor traceIdFeignInterceptor() {
         return template -> {
             // 1. Add trace information
-            addTraceHeaders(template);
+			// no need use java agent instead
+			// addTraceHeaders(template);
 
             // 2. Add Bearer token
             addAuthorizationHeader(template);
@@ -51,18 +52,18 @@ public class FeignConfig {
      * Add distributed tracing headers to the request
      * Format: 00-traceId-parentId-01
      */
-    private void addTraceHeaders(feign.RequestTemplate template) {
-        String traceId = tracer.currentSpan() != null ?
-                tracer.currentSpan().context().traceIdString() : null;
-        String parentId = tracer.currentSpan() != null ?
-                tracer.currentSpan().context().parentIdString() : null;
-
-        String traceParent = String.format(TRACE_PARENT,
-                traceId,
-                parentId == null ? BASE_PARENT_ID : parentId
-        );
-        template.header("traceparent", traceParent);
-    }
+	// private void addTraceHeaders(feign.RequestTemplate template) {
+	// String traceId = tracer.currentSpan() != null ?
+	// tracer.currentSpan().context().traceIdString() : null;
+	// String parentId = tracer.currentSpan() != null ?
+	// tracer.currentSpan().context().parentIdString() : null;
+	//
+	// String traceParent = String.format(TRACE_PARENT,
+	// traceId,
+	// parentId == null ? BASE_PARENT_ID : parentId
+	// );
+	// template.header("traceparent", traceParent);
+	// }
 
     /**
      * Propagate Authorization header from the current request to Feign client
